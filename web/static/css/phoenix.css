@@ -10,8 +10,8 @@
 
 /* Space out content a bit */
 body, form, ul, table {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* Phoenix flash messages */
@@ -24,7 +24,7 @@ form.link, form.button {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  /* border-bottom: 1px solid #e5e5e5; */
 }
 .logo {
   width: 519px;
@@ -43,7 +43,7 @@ form.link, form.button {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
+@media (min-width: 768px, max-width: 1200px) {
   .container {
     max-width: 730px;
   }
