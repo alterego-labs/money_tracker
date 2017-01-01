@@ -7,19 +7,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello MoneyTracker!</title>
+    <title>MoneyTracker!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <div class="container">
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">
+                <img alt="Brand" src="/images/logo.png" height="20">
+              </a>
+              <a class="navbar-brand" href="#">
+                Money Tracker
+              </a>
+            </div>
+          </div>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
