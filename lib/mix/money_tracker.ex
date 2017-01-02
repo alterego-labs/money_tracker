@@ -1,4 +1,7 @@
 defmodule Mix.MoneyTracker do
+  @doc """
+  Ensures the ecto application and all repos are started and running
+  """
   def ensure_ecto_started do
     {:ok, _} = Application.ensure_all_started(:ecto)
     repos = Application.get_env(:money_tracker, :ecto_repos)
