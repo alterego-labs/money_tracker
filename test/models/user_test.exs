@@ -15,4 +15,16 @@ defmodule MoneyTracker.UserTest do
     changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  test "by_username_or_email filters by username" do
+    user = insert(:user)
+    results = User |> User.by_username_or_email(user.username) |> Repo.all
+    assert Enum.count(results) == 1
+  end
+
+  test "by_username_or_email filters by email" do
+    user = insert(:user)
+    results = User |> User.by_username_or_email(user.email) |> Repo.all
+    assert Enum.count(results) == 1
+  end
 end

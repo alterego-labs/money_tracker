@@ -40,7 +40,11 @@ defmodule MoneyTracker.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 3.0"},
-      {:guardian, "0.14.0"}
+      {:guardian, "0.14.0"},
+      {:credo, "~> 0.4", only: [:dev, :test]},
+      {:mock, "~> 0.2.0", only: :test},
+      {:ex_machina, "~> 1.0.1", only: :test},
+      {:faker, "~> 0.5", only: :test}
     ]
   end
 
