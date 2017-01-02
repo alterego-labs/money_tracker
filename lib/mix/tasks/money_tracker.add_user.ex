@@ -5,6 +5,7 @@ defmodule Mix.Tasks.MoneyTracker.AddUser do
   import Mix.MoneyTracker, only: [ensure_ecto_started: 0]
 
   alias MoneyTracker.{Repo, User}
+  alias MoneyTracker.User.PasswordCryptor
 
   @shortdoc "Adds new user to the system"
 
@@ -46,7 +47,7 @@ defmodule Mix.Tasks.MoneyTracker.AddUser do
     ensure_ecto_started
     opts_map = Enum.into(opts, %{})
     original_password = Map.get(opts_map, :password)
-    encrypted_password = Comeonin.Bcrypt.hashpwsalt(original_password)
+    encrypted_password = PasswordCryptor.encrypt(original_password)
     opts_map = opts_map
                 |> Map.put(:encrypted_password, encrypted_password)
                 |> Map.delete(:password)

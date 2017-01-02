@@ -22,6 +22,7 @@ defmodule MoneyTracker.ModelCase do
       import Ecto.Changeset
       import Ecto.Query
       import MoneyTracker.ModelCase
+      import MoneyTracker.Factory
     end
   end
 
