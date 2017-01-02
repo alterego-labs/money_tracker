@@ -14,6 +14,8 @@ defmodule MoneyTracker.User do
     field :email, :string
     field :encrypted_password, :string
 
+    has_many :places, MoneyTracker.Place
+
     timestamps()
   end
 
