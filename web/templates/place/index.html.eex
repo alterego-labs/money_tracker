@@ -3,21 +3,18 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Currency</th>
       <th>Title</th>
       <th>Description</th>
-      <th>User</th>
-
+      <th>Currency</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for place <- @places do %>
     <tr>
-      <td><%= place.currency %></td>
       <td><%= place.title %></td>
       <td><%= place.description %></td>
-      <td><%= place.user_id %></td>
+      <td><%= place.currency %></td>
 
       <td class="text-right">
         <%= link "Show", to: place_path(@conn, :show, place), class: "btn btn-default btn-xs" %>

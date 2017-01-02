@@ -1,5 +1,11 @@
 defmodule MoneyTracker.Place do
+  @moduledoc """
+  Represents a Money Place entity in the system
+  """
+
   use MoneyTracker.Web, :model
+
+  alias MoneyTracker.User
 
   schema "places" do
     field :currency, :string
@@ -15,7 +21,16 @@ defmodule MoneyTracker.Place do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:currency, :title, :description])
-    |> validate_required([:currency, :title, :description])
+    |> cast(params, [:currency, :title, :description, :user_id])
+    |> validate_required([:currency, :title, :description, :user_id])
+  end
+
+  @doc """
+  Scope to filter places by user
+  """
+  @spec for_user(Ecto.Queryable.t, User.t) :: Ecto.Queryable.t
+  def for_user(query, %User{} = user) do
+    from p in query,
+    where: p.user_id == ^user.id
   end
 end
