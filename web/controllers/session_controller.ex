@@ -10,6 +10,7 @@ defmodule MoneyTracker.SessionController do
     render conn, "index.html"
   end
 
+  @lint {Credo.Check.Design.AliasUsage, false}
   def create(conn, %{"user" => user_params}) do
     username_or_email = Map.get(user_params, "username_or_email")
     password = Map.get(user_params, "password")

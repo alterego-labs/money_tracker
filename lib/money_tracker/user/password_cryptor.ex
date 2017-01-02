@@ -7,6 +7,7 @@ defmodule MoneyTracker.User.PasswordCryptor do
   Encrypts user's password
   """
   @spec encrypt(String.t) :: String.t
+  @lint {Credo.Check.Design.AliasUsage, false}
   def encrypt(password) do
     Comeonin.Bcrypt.hashpwsalt(password)
   end
@@ -15,6 +16,7 @@ defmodule MoneyTracker.User.PasswordCryptor do
   Checks incoming password with the original from the DB.
   """
   @spec check(String.t, String.t) :: boolean
+  @lint {Credo.Check.Design.AliasUsage, false}
   def check(password, encrypted_password) do
     Comeonin.Bcrypt.checkpw(password, encrypted_password)
   end

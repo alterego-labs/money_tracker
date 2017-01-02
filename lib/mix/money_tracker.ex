@@ -1,4 +1,8 @@
 defmodule Mix.MoneyTracker do
+  @moduledoc """
+  Provides helper functions for the MoneyTracker's Mix tasks
+  """
+
   @doc """
   Ensures the ecto application and all repos are started and running
   """

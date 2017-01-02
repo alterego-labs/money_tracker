@@ -1,4 +1,8 @@
 defmodule MoneyTracker.User do
+  @moduledoc """
+  Represents an User entity in the system.
+  """
+
   use MoneyTracker.Web, :model
 
   alias MoneyTracker.Repo
