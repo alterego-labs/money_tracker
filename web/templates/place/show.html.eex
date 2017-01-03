@@ -18,6 +18,11 @@
     <%= @place.currency %>
   </li>
 
+  <li>
+    <strong>Current Balance:</strong>
+    <%= place_balance(@place) %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: place_path(@conn, :edit, @place) %>
