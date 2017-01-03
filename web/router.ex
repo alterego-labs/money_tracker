@@ -12,6 +12,7 @@ defmodule MoneyTracker.Router do
   pipeline :browser_auth do  
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
+    plug MoneyTracker.Plug.CurrentUserProvider
   end  
 
   pipeline :api do

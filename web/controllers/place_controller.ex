@@ -1,6 +1,5 @@
 defmodule MoneyTracker.PlaceController do
   use MoneyTracker.Web, :controller
-  use Guardian.Phoenix.Controller
 
   import Ecto.Changeset, only: [put_change: 3]
 
@@ -8,17 +7,19 @@ defmodule MoneyTracker.PlaceController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__
 
-  def index(conn, _params, user, _claims) do
+  def index(conn, _params) do
+    user = conn.assigns[:current_user]
     places = Place |> Place.for_user(user) |> Repo.all
     render(conn, "index.html", places: places)
   end
 
-  def new(conn, _params, _user, _claims) do
+  def new(conn, _params) do
     changeset = Place.changeset(%Place{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"place" => place_params}, user, _claims) do
+    user = conn.assigns[:current_user]
     changeset = %Place{user_id: user.id}
                 |> Place.changeset(place_params)
 
@@ -32,18 +33,21 @@ defmodule MoneyTracker.PlaceController do
     end
   end
 
-  def show(conn, %{"id" => id}, user, _claims) do
+  def show(conn, %{"id" => id}) do
+    user = conn.assigns[:current_user]
     place = fetch_place(user, id)
     render(conn, "show.html", place: place)
   end
 
-  def edit(conn, %{"id" => id}, user, _claims) do
+  def edit(conn, %{"id" => id}) do
+    user = conn.assigns[:current_user]
     place = fetch_place(user, id)
     changeset = Place.changeset(place)
     render(conn, "edit.html", place: place, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "place" => place_params}, user, _claims) do
+  def update(conn, %{"id" => id, "place" => place_params}) do
+    user = conn.assigns[:current_user]
     place = fetch_place(user, id)
     changeset = Place.changeset(place, place_params)
 
@@ -57,7 +61,8 @@ defmodule MoneyTracker.PlaceController do
     end
   end
 
-  def delete(conn, %{"id" => id}, user, _claims) do
+  def delete(conn, %{"id" => id}) do
+    user = conn.assigns[:current_user]
     place = fetch_place(user, id)
 
     # Here we use delete! (with a bang) because we expect
