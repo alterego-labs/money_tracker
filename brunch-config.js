@@ -3,6 +3,11 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: "js/app.js"
+      // order: {
+      //   before: [
+      //     "node_modules/bootstrap/dist/js/bootstrap.min.js"
+      //   ]
+      // }
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -67,6 +72,9 @@ exports.config = {
     enabled: true,
     styles: {
       bootstrap: ['dist/css/bootstrap.min.css']
+    },
+    globals: {
+      jQuery: "jquery"
     }
   }
 };
