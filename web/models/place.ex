@@ -11,7 +11,9 @@ defmodule MoneyTracker.Place do
     field :currency, :string
     field :title, :string
     field :description, :string
+
     belongs_to :user, MoneyTracker.User
+    has_many :transactions, MoneyTracker.Transaction
 
     timestamps()
   end

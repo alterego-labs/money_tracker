@@ -27,6 +27,8 @@ defmodule MoneyTracker.Router do
     post "/sign_in", SessionController, :create
 
     resources "/places", PlaceController
+
+    resources "/transactions", TransactionController
   end
 
   # Other scopes may use custom stacks.
