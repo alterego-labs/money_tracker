@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Balance</th>
       <th>Currency</th>
       <th></th>
     </tr>
@@ -14,6 +15,7 @@
     <tr>
       <td><%= place.title %></td>
       <td><%= place.description %></td>
+      <td><%= place_balance(place) %></td>
       <td><%= place.currency %></td>
 
       <td class="text-right">
