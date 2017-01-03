@@ -20,4 +20,5 @@
 </ul>
 
 <%= link "Edit", to: place_transaction_path(@conn, :edit, @place, @transaction) %>
+&nbsp;|&nbsp;
 <%= link "Back", to: place_transaction_path(@conn, :index, @place) %>

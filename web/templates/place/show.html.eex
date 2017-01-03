@@ -2,10 +2,6 @@
 
 <ul>
 
-  <li>
-    <strong>Currency:</strong>
-    <%= @place.currency %>
-  </li>
 
   <li>
     <strong>Title:</strong>
@@ -17,8 +13,15 @@
     <%= @place.description %>
   </li>
 
+  <li>
+    <strong>Currency:</strong>
+    <%= @place.currency %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: place_path(@conn, :edit, @place) %>
 &nbsp;|&nbsp;
 <%= link "Back", to: place_path(@conn, :index) %>
+&nbsp;|&nbsp;
+<%= link "Transactions", to: place_transaction_path(@conn, :index, @place) %>
