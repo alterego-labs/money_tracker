@@ -1,6 +1,6 @@
 <h2>New transaction</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: transaction_path(@conn, :create) %>
+                        action: place_transaction_path(@conn, :create, @place) %>
 
-<%= link "Back", to: transaction_path(@conn, :index) %>
+<%= link "Back", to: place_transaction_path(@conn, :index, @place) %>
