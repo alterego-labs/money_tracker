@@ -33,4 +33,7 @@
       </li>
     </ul>
   </div>
+  <%= for {currency, balance} <- balances_per_currency(@current_user) do %>
+    <%= raw("#{currency}: #{Float.to_string(balance, decimals: 2)}<br/>") %>
+  <% end %>
 </div>
