@@ -4,7 +4,7 @@ defmodule MoneyTracker.SessionController do
   alias MoneyTracker.Operations.SignIn
   alias MoneyTracker.User
 
-  plug Guardian.Plug.EnsureNotAuthenticated, handler: __MODULE__
+  plug Guardian.Plug.EnsureNotAuthenticated, handler: __MODULE__, only: [:create]
 
   def index(conn, _params) do
     render conn, "index.html"
@@ -24,6 +24,13 @@ defmodule MoneyTracker.SessionController do
         |> Guardian.Plug.sign_in(user)
         |> redirect(to: "/")
     end
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> Guardian.Plug.sign_out
+    |> put_flash(:info, "Logged out successfully!")
+    |> redirect(to: "/")
   end
 
   def already_authenticated(conn, _params) do
