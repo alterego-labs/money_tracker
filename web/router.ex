@@ -26,6 +26,7 @@ defmodule MoneyTracker.Router do
 
     get "/sign_in", SessionController, :index
     post "/sign_in", SessionController, :create
+    delete "/sign_out", SessionController, :delete
 
     resources "/places", PlaceController do
       resources "/transactions", TransactionController
