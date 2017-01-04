@@ -22,4 +22,12 @@ defmodule MoneyTracker.LayoutView do
   def place_link_active?(conn) do
     Regex.match? ~r/\/places(\/?(\d+)?\/?(\?.*)?)$/, conn.request_path
   end
+
+  @doc """
+  Specifies if transactions link in the header active or not
+  """
+  @spec transactions_link_active?(Plug.Conn.t) :: boolean
+  def transactions_link_active?(conn) do
+    Regex.match? ~r/^\/transactions(\/?(\d+)?\/?(\?.*)?)$/, conn.request_path
+  end
 end
