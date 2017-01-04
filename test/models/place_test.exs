@@ -3,7 +3,7 @@ defmodule MoneyTracker.PlaceTest do
 
   alias MoneyTracker.Place
 
-  @valid_attrs %{currency: "some content", description: "some content", title: "some content"}
+  @valid_attrs %{currency: "some content", description: "some content", title: "some content", user_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
@@ -17,7 +17,7 @@ defmodule MoneyTracker.PlaceTest do
   end
 
   test "for_user filters places by user" do
-    user1 = insert(:user) |> with_place
+    _user1 = insert(:user) |> with_place
     user2 = insert(:user)
     Enum.each 1..2, fn(_tick) -> with_place(user2) end
     result = Place |> Place.for_user(user2) |> Repo.all
