@@ -42,4 +42,13 @@ defmodule MoneyTracker.Transaction do
     from t in query,
     where: t.place_id in ^place_ids
   end
+
+  @doc """
+  Scope to add place preloading
+  """
+  @spec with_preloaded_place(Ecto.Queryable.t) :: Ecto.Queryable.t
+  def with_preloaded_place(query) do
+    from t in query,
+    preload: [:place]
+  end
 end
