@@ -28,6 +28,8 @@ defmodule MoneyTracker.Router do
     post "/sign_in", SessionController, :create
     delete "/sign_out", SessionController, :delete
 
+    get "/transactions", TransactionController, :index
+
     resources "/places", PlaceController do
       resources "/transactions", PlaceTransactionController , as: :transaction
     end
