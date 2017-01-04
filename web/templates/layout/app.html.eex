@@ -28,6 +28,7 @@
               <ul class="nav navbar-nav">
                 <li class="<%= if dashboard_link_active?(@conn), do: "active" %>"><a href="/">Dashboard <span class="sr-only">(current)</span></a></li>
                 <li class="<%= if place_link_active?(@conn), do: "active" %>"><a href="<%= place_path(@conn, :index) %>">Places <span class="sr-only">(current)</span></a></li>
+                <li class="<%= if transactions_link_active?(@conn), do: "active" %>"><a href="<%= transaction_path(@conn, :index) %>">All Transactions <span class="sr-only">(current)</span></a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <%= if authenticated?(@conn) do %>
