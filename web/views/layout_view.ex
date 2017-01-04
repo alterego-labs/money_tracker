@@ -8,14 +8,6 @@ defmodule MoneyTracker.LayoutView do
   import Plug.Conn
 
   @doc """
-  Specifies if current user exists or not
-  """
-  @spec authenticated?(Plug.Conn.t) :: boolean
-  def authenticated?(conn) do
-    conn.assigns[:current_user] != nil
-  end
-
-  @doc """
   Specifies if dashboard link in the header active or not
   """
   @spec dashboard_link_active?(Plug.Conn.t) :: boolean

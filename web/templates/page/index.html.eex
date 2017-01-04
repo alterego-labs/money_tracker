@@ -1,30 +1,41 @@
-<div class="page-header">
-  <h1>Dashboard <small>balance statistics widgets</small></h1>
-</div>
+<%= if authenticated?(@conn) do %>
+  <div class="page-header">
+    <h1>Dashboard <small>balance statistics widgets</small></h1>
+  </div>
 
 
-<div class="row marketing">
-  <div class="col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">Balance per Currency</div>
-      <div class="panel-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Currency</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for {currency, balance} <- balances_per_currency(@current_user) do %>
+  <div class="row marketing">
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Balance per Currency</div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
               <tr>
-                <td><%= currency %></td>
-                <td><%= Float.to_string(balance, decimals: 2) %></td>
+                <th>Currency</th>
+                <th>Balance</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <%= for {currency, balance} <- balances_per_currency(@current_user) do %>
+                <tr>
+                  <td><%= currency %></td>
+                  <td><%= Float.to_string(balance, decimals: 2) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+<% else %>
+  <div class="jumbotron">
+    <h1>Hello, dude!</h1>
+    <p>There you can manage your money budget easily! Just define places where you keep money and track transactions for each place independently!</p>
+    <p>Sign in and try the whole functional in play:</p>
+    <p>
+      <%= link "Sign In", to: session_path(@conn, :index), class: "btn btn-primary btn-lg", role: "button" %>
+    </p>
 </div>
+<% end %>

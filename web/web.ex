@@ -52,6 +52,7 @@ defmodule MoneyTracker.Web do
       import MoneyTracker.Router.Helpers
       import MoneyTracker.ErrorHelpers
       import MoneyTracker.Gettext
+      import MoneyTracker.AuthViewHelpers
     end
   end
 
