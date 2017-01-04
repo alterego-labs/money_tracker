@@ -29,7 +29,7 @@ defmodule MoneyTracker.Router do
     delete "/sign_out", SessionController, :delete
 
     resources "/places", PlaceController do
-      resources "/transactions", TransactionController
+      resources "/transactions", PlaceTransactionController , as: :transaction
     end
   end
 

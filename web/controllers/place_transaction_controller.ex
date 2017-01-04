@@ -1,4 +1,4 @@
-defmodule MoneyTracker.TransactionController do
+defmodule MoneyTracker.PlaceTransactionController do
   use MoneyTracker.Web, :controller
 
   alias MoneyTracker.Transaction
