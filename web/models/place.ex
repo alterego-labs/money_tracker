@@ -35,4 +35,13 @@ defmodule MoneyTracker.Place do
     from p in query,
     where: p.user_id == ^user.id
   end
+
+  @doc """
+  Scope to filter places by currency
+  """
+  @spec for_currency(Ecto.Queryable.t, String.t) :: Ecto.Queryable.t
+  def for_currency(query, currency) do
+    from p in query,
+    where: p.currency == ^currency
+  end
 end

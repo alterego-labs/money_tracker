@@ -1,7 +1,6 @@
 defmodule Mix.Tasks.MoneyTracker.AddUser do
   use Mix.Task
 
-  import Ecto.Changeset, only: [put_change: 3]
   import Mix.MoneyTracker, only: [ensure_ecto_started: 0]
 
   alias MoneyTracker.{Repo, User}
@@ -55,7 +54,7 @@ defmodule Mix.Tasks.MoneyTracker.AddUser do
     case Repo.insert(user_changeset) do
       {:ok, _struct} ->
         Mix.shell.info [:green, "User has been registered successfully!"]
-      {:error, changeset} ->
+      {:error, _changeset} ->
         Mix.shell.error "Registration failed!"
     end
   end

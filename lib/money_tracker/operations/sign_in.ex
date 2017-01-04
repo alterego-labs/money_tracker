@@ -26,7 +26,7 @@ defmodule MoneyTracker.Operations.SignIn do
     |> Repo.one
   end
 
-  defp authenticate(nil = user, _password), do: {:error, :invalid_credentials}
+  defp authenticate(nil = _user, _password), do: {:error, :invalid_credentials}
   defp authenticate(user, password) do
     case PasswordCryptor.check(password, user.encrypted_password) do
       true -> {:ok, user}

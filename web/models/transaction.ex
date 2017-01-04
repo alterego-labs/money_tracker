@@ -33,4 +33,13 @@ defmodule MoneyTracker.Transaction do
     from t in query,
     where: t.place_id == ^place.id
   end
+
+  @doc """
+  Scope for filtering transactions by several places
+  """
+  def for_places(query, places) do
+    place_ids = Enum.map(places, fn(place) -> place.id end)
+    from t in query,
+    where: t.place_id in ^place_ids
+  end
 end
