@@ -63,4 +63,6 @@ case "$1" in
   "stop")
     stop_web_container;
     stop_mysql_container;;
+  "run_custom_mix")
+    run_mix_command "mix $2";;
 esac
