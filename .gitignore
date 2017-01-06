@@ -24,3 +24,7 @@ erl_crash.dump
 /config/prod.secret.exs
 
 npm-debug.log.*
+
+/docker/mysql/mysql.env
+/docker/money_tracker.env
+/docker/mysql/data/**/*
