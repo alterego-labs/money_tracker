@@ -21,7 +21,7 @@ defmodule Mix.Tasks.MoneyTracker.AddUser do
   For example:
 
   ```shell
-  $ mix money_tracker:add_user --username sergio --email sergio@mail.com --password password
+  $ mix money_tracker.add_user --username sergio --email sergio@mail.com --password password
   ```
   """
 
