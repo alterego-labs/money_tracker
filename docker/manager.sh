@@ -18,6 +18,7 @@ function run_mysql_container {
   docker run \
     --name money_tracker_mysql_container \
     --env-file ./docker/mysql/mysql.env \
+    --restart=unless-stopped \
     -v $MYSQL_DATA_FOLDER:/var/lib/mysql \
     -d -p 3306:3306 mysql:5.6
 }
