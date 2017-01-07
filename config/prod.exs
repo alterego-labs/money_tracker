@@ -59,6 +59,14 @@ config :phoenix, :serve_endpoints, true
 #     config :money_tracker, MoneyTracker.Endpoint, server: true
 #
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
+config :money_tracker, MoneyTracker.Endpoint,
+  secret_key_base: System.get_env("MONEY_TRACKER_SECRET_KEY_BASE")
+
+# Configure your database
+config :money_tracker, MoneyTracker.Repo,
+  adapter: Ecto.Adapters.MySQL,
+  username: System.get_env("MONEY_TRACKER_MYSQL_USER"),
+  password: System.get_env("MONEY_TRACKER_MYSQL_PASSWORD"),
+  database: System.get_env("MONEY_TRACKER_MYSQL_DB"),
+  hostname: System.get_env("MONEY_TRACKER_MYSQL_HOST"),
+  pool_size: 20
