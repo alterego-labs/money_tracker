@@ -26,6 +26,8 @@ RUN mix local.rebar --force
 
 COPY . ./
 
+RUN mkdir priv/static
+
 RUN mix compile
 RUN mix phoenix.digest
 RUN mix release --verbosity=verbose
