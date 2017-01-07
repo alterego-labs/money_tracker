@@ -20,6 +20,7 @@ defmodule MoneyTracker.User.AvailableCurrenciesFetcher do
 
   defp select_currency_scope(query) do
     from p in query,
+    distinct: true,
     select: p.currency
   end
 end

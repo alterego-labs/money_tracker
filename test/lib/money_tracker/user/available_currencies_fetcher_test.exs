@@ -15,4 +15,12 @@ defmodule MoneyTracker.User.AvailableCurrenciesFetcherTest do
     assert Enum.any?(currencies)
     assert Enum.at(currencies, 0) == "USD"
   end
+
+  test "run returns a distinct list of currencies" do
+    user = insert(:user) |> with_place |> with_place
+    currencies = AvailableCurrenciesFetcher.run(user)
+    assert Enum.any?(currencies)
+    assert Enum.count(currencies) == 1
+    assert Enum.at(currencies, 0) == "USD"
+  end
 end
