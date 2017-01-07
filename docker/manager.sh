@@ -29,7 +29,15 @@ function stop_mysql_container {
 
 function build_web_container {
   echo "Building web container..."
-  docker build -t money_tracker_image .
+  source $PWD/docker/money_tracker.env
+  docker build \
+    --build-arg MONEY_TRACKER_SECRET_KEY_BASE=$MONEY_TRACKER_SECRET_KEY_BASE \
+    --build-arg MONEY_TRACKER_HOST=$MONEY_TRACKER_HOST \
+    --build-arg MONEY_TRACKER_MYSQL_USER=$MONEY_TRACKER_MYSQL_USER \
+    --build-arg MONEY_TRACKER_MYSQL_PASSWORD=$MONEY_TRACKER_MYSQL_PASSWORD \
+    --build-arg MONEY_TRACKER_MYSQL_DB=$MONEY_TRACKER_MYSQL_DB \
+    --build-arg MONEY_TRACKER_MYSQL_HOST=$MONEY_TRACKER_MYSQL_HOST \
+    -t money_tracker_image .
 }
 
 function run_web_container {
