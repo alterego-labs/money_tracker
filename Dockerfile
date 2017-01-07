@@ -26,11 +26,6 @@ RUN mix local.rebar --force
 
 COPY . ./
 
-RUN mkdir priv/static
-RUN mkdir priv/static/css
-RUN mkdir priv/static/js
-RUN mkdir priv/static/images
-
 RUN mix compile
 RUN mix phoenix.digest
 RUN mix release --verbosity=verbose

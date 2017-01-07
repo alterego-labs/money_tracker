@@ -44,7 +44,8 @@ function install_npm_dependencies {
     --rm --memory="512M" \
     -w="/app" \
     -v $PWD:/app \
-    node:6.9.4 npm install
+    --entrypoint=/app/docker/npm_deps_install.sh \
+    node:6.9.4
 }
 
 function build_web_container {
