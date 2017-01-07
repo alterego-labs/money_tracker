@@ -13,12 +13,12 @@ defmodule MoneyTracker.Place.BalanceCalculator do
     Transaction
     |> Transaction.for_place(place)
     |> Repo.all
-    |> Enum.reduce(0, fn(transaction, acc) -> acc + transaction.amount end)
+    |> Enum.reduce(0.0, fn(transaction, acc) -> acc + transaction.amount end)
   end
   def run(places) when is_list(places) do
     Transaction
     |> Transaction.for_places(places)
     |> Repo.all
-    |> Enum.reduce(0, fn(transaction, acc) -> acc + transaction.amount end)
+    |> Enum.reduce(0.0, fn(transaction, acc) -> acc + transaction.amount end)
   end
 end
