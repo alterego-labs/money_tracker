@@ -90,7 +90,10 @@ case "$1" in
   "build")
     install_mix_dependencies;
     install_npm_dependencies;
-    build_web_container;;
+    build_web_container;
+    rm -rf _build/;
+    rm -rf deps/;
+    rm -rf node_modules;;
   "run")
     run_mysql_container;
     run_mix_command "mix do ecto.create, ecto.migrate";
