@@ -26,7 +26,6 @@ RUN mix local.rebar --force
 
 COPY . ./
 
-RUN mix deps.get && mix deps.compile
 RUN mix compile
 RUN mix phoenix.digest
 RUN mix release --verbosity=verbose
