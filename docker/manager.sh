@@ -62,6 +62,10 @@ function run_mix_command {
 }
 
 case "$1" in
+  "setup")
+    mkdir $PWD/docker/mysql/data;
+    touch $PWD/docker/money_tracker.env;
+    touch $PWD/docker/mysql/mysql.env;;
   "build")
     build_web_container;;
   "run")
