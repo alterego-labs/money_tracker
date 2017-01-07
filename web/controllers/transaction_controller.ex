@@ -13,6 +13,7 @@ defmodule MoneyTracker.TransactionController do
     transactions = Transaction
                     |> Transaction.for_places(user_places)
                     |> Transaction.with_preloaded_place
+                    |> Transaction.recent_sorting
                     |> Repo.all
     render(conn, "index.html", transactions: transactions)
   end

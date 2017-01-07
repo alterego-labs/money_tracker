@@ -8,7 +8,10 @@ defmodule MoneyTracker.PlaceTransactionController do
 
   def index(conn, _params) do
     place = conn.assigns[:place]
-    transactions = Transaction |> Transaction.for_place(place) |> Repo.all
+    transactions = Transaction
+                    |> Transaction.for_place(place)
+                    |> Transaction.recent_sorting
+                    |> Repo.all
     render(conn, "index.html", transactions: transactions)
   end
 

@@ -51,4 +51,13 @@ defmodule MoneyTracker.Transaction do
     from t in query,
     preload: [:place]
   end
+
+  @doc """
+  Scope to add sorting by recent items.
+  """
+  @spec recent_sorting(Ecto.Queryable.t) :: Ecto.Queryable.t
+  def recent_sorting(query) do
+    from t in query,
+    order_by: [asc: t.inserted_at]
+  end
 end
