@@ -18,7 +18,7 @@ defmodule MoneyTracker.PlaceController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"place" => place_params}, user, _claims) do
+  def create(conn, %{"place" => place_params}) do
     user = conn.assigns[:current_user]
     changeset = %Place{user_id: user.id}
                 |> Place.changeset(place_params)
