@@ -77,6 +77,7 @@ function run_mix_command {
   echo "Running mix command '$1' on web container..."
   docker run \
     --rm \
+    --env-file $PWD/docker/money_tracker.env \
     --link money_tracker_mysql_container:mysql \
     money_tracker_image $1
 }
