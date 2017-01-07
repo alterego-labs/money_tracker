@@ -27,6 +27,26 @@ function stop_mysql_container {
   stop_container_by_name "money_tracker_mysql_container";
 }
 
+function install_mix_dependencies {
+  echo "Starting installing MIX dependencies..."
+  docker run \
+    --rm --memory="512M" \
+    -w="/app" \
+    -v $PWD:/app \
+    -e MIX_ENV=prod \
+    --entrypoint=/app/docker/mix_deps_install.sh \
+    elixir:1.3.2
+}
+
+function install_npm_dependencies {
+  echo "Starting installing NPM dependencies..."
+  docker run \
+    --rm --memory="512M" \
+    -w="/app" \
+    -v $PWD:/app \
+    node:6.9.4 npm install
+}
+
 function build_web_container {
   echo "Building web container..."
   source $PWD/docker/money_tracker.env
@@ -68,6 +88,8 @@ case "$1" in
     touch $PWD/docker/money_tracker.env;
     touch $PWD/docker/mysql/mysql.env;;
   "build")
+    install_mix_dependencies;
+    install_npm_dependencies;
     build_web_container;;
   "run")
     run_mysql_container;
