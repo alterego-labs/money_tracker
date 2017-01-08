@@ -69,4 +69,5 @@ config :money_tracker, MoneyTracker.Repo,
   password: System.get_env("MONEY_TRACKER_MYSQL_PASSWORD"),
   database: System.get_env("MONEY_TRACKER_MYSQL_DB"),
   hostname: System.get_env("MONEY_TRACKER_MYSQL_HOST"),
+  charset: "utf8",
   pool_size: 20

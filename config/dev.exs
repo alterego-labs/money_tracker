@@ -40,4 +40,5 @@ config :money_tracker, MoneyTracker.Repo,
   password: "",
   database: "money_tracker_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 10,
+  charset: "utf8"
