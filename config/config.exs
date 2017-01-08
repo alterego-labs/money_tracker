@@ -32,6 +32,15 @@ config :guardian, Guardian,
   secret_key: ";ofjm98y983yr82y387m238ymz23ymr8zmy23rym32ry23yrm32rm3hrm3xhhmkhmajdaou",
   serializer: MoneyTracker.GuardianSerializer
 
+config :number, currency: [
+                  unit: "USD",
+                  precision: 2,
+                  delimiter: " ",
+                  separator: ".",
+                  format: "%u %n",           # "USD 30.00"
+                  negative_format: "(%u %n)" # "(USD 30.00)"
+                ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

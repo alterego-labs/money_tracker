@@ -19,7 +19,7 @@ defmodule MoneyTracker.Mixfile do
   def application do
     [mod: {MoneyTracker, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :mariaex, :comeonin, :guardian]]
+                    :phoenix_ecto, :mariaex, :comeonin, :guardian, :number]]
   end
 
   # Specifies which paths to compile per environment.
@@ -45,7 +45,8 @@ defmodule MoneyTracker.Mixfile do
       {:mock, "~> 0.2.0", only: :test},
       {:ex_machina, "~> 1.0.1", only: :test},
       {:faker, "~> 0.5", only: :test},
-      {:exrm, "~> 1.0"}
+      {:exrm, "~> 1.0"},
+      {:number, "~> 0.5.0"}
     ]
   end
 

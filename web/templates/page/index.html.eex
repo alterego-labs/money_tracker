@@ -20,7 +20,7 @@
               <%= for {currency, balance} <- balances_per_currency(@current_user) do %>
                 <tr>
                   <td><%= currency %></td>
-                  <td><%= Float.to_string(balance, decimals: 2) %></td>
+                  <td><%= number_to_currency(balance, unit: "") %></td>
                 </tr>
               <% end %>
             </tbody>

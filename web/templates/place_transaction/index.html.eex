@@ -13,7 +13,7 @@
   <tbody>
 <%= for transaction <- @transactions do %>
     <tr>
-      <td><%= Float.to_string(transaction.amount, decimals: 2) %>&nbsp;<%= @place.currency %></td>
+      <td><%= number_to_currency(transaction.amount, unit: @place.currency) %></td>
       <td><%= transaction.description %></td>
       <td><%= transaction.inserted_at %></td>
 

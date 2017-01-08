@@ -15,7 +15,7 @@
       <td>
         <%= link transaction.place.title, to: place_path(@conn, :show, transaction.place) %>
       </td>
-      <td><%= Float.to_string(transaction.amount, decimals: 2) %>&nbsp;<%= transaction.place.currency %></td>
+      <td><%= number_to_currency(transaction.amount, unit: transaction.place.currency) %></td>
       <td><%= transaction.description %></td>
       <td><%= transaction.inserted_at %></td>
     </tr>

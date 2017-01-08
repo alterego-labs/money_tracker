@@ -12,6 +12,8 @@ defmodule MoneyTracker.PlaceView do
   """
   @spec place_balance(Place.t) :: float
   def place_balance(place) do
-    Float.to_string(MoneyTracker.Place.BalanceCalculator.run(place), decimals: 2)
+    place
+    |> Place.BalanceCalculator.run
+    |> number_to_currency(decimals: 2, unit: place.currency)
   end
 end
