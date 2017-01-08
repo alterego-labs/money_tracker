@@ -58,6 +58,6 @@ defmodule MoneyTracker.Transaction do
   @spec recent_sorting(Ecto.Queryable.t) :: Ecto.Queryable.t
   def recent_sorting(query) do
     from t in query,
-    order_by: [asc: t.inserted_at]
+    order_by: [desc: t.inserted_at]
   end
 end
