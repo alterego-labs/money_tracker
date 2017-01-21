@@ -7,9 +7,9 @@ defmodule MoneyTracker.Repo.Migrations.FixCharsets do
     # execute "ALTER DATABASE #{current_db_name} CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
   end
 
-  defp current_db_name do
-    :money_tracker
-    |> Application.get_env(MoneyTracker.Repo)
-    |> Keyword.get(:database)
-  end
+  # defp current_db_name do
+  #   :money_tracker
+  #   |> Application.get_env(MoneyTracker.Repo)
+  #   |> Keyword.get(:database)
+  # end
 end

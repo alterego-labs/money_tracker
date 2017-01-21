@@ -13,7 +13,7 @@ defmodule Mix.MoneyTracker do
   end
 
   defp ensure_repo_started(repo) do
-    {:ok, apps} = repo.__adapter__.ensure_all_started(repo, :temporary)
+    {:ok, _apps} = repo.__adapter__.ensure_all_started(repo, :temporary)
     repo.start_link(pool_size: 1)
   end
 end

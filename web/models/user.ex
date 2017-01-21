@@ -5,8 +5,6 @@ defmodule MoneyTracker.User do
 
   use MoneyTracker.Web, :model
 
-  alias MoneyTracker.Repo
-
   @type t :: %__MODULE__{}
 
   schema "users" do

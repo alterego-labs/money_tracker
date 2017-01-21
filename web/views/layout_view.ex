@@ -5,8 +5,6 @@ defmodule MoneyTracker.LayoutView do
 
   use MoneyTracker.Web, :view
 
-  import Plug.Conn
-
   @doc """
   Specifies if dashboard link in the header active or not
   """

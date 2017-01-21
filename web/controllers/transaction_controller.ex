@@ -1,9 +1,7 @@
 defmodule MoneyTracker.TransactionController do
   use MoneyTracker.Web, :controller
 
-  import Ecto.Query, only: [preload: 3]
-
-  alias MoneyTracker.{Transaction, User, Place, Repo}
+  alias MoneyTracker.{Transaction, Place, Repo}
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__
 

@@ -1,8 +1,6 @@
 defmodule MoneyTracker.PlaceController do
   use MoneyTracker.Web, :controller
 
-  import Ecto.Changeset, only: [put_change: 3]
-
   alias MoneyTracker.Place
 
   plug Guardian.Plug.EnsureAuthenticated, handler: __MODULE__
