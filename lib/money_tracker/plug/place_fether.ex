@@ -19,6 +19,7 @@ defmodule MoneyTracker.Plug.PlaceFetcher do
     Guardian.Plug.current_resource(conn, key)
   end
 
+  # FIXME: We must to add additinal scope to select place which is relative to the user
   defp fetch_place_for_user(user, place_id) do
     Repo.get!(Place, place_id)
   end
