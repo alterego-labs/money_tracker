@@ -6,6 +6,7 @@ defmodule MoneyTracker.PlaceView do
   use MoneyTracker.Web, :view
 
   alias MoneyTracker.Place
+  alias Place.BalanceCalculator
 
   @doc """
   Returns a balance for a given place
@@ -13,7 +14,7 @@ defmodule MoneyTracker.PlaceView do
   @spec place_balance(Place.t) :: float
   def place_balance(place) do
     place
-    |> Place.BalanceCalculator.run
+    |> BalanceCalculator.run
     |> number_to_currency(decimals: 2, unit: place.currency)
   end
 end

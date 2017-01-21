@@ -12,7 +12,8 @@ defmodule MoneyTracker.PageView do
   """
   @spec balances_per_currency(User.t) :: [{currency, balance}]
   def balances_per_currency(%User{} = user) do
-    AvailableCurrenciesFetcher.run(user)
+    user
+    |> AvailableCurrenciesFetcher.run
     |> Enum.map(fn(currency) ->
       {currency, BalanceForCurrencyCalculator.run(user, currency)}
     end)

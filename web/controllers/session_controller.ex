@@ -26,6 +26,7 @@ defmodule MoneyTracker.SessionController do
     end
   end
 
+  @lint {Credo.Check.Design.AliasUsage, false}
   def delete(conn, _params) do
     conn
     |> Guardian.Plug.sign_out

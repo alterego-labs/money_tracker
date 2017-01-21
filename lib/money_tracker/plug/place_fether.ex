@@ -1,12 +1,23 @@
 defmodule MoneyTracker.Plug.PlaceFetcher do
+  @moduledoc """
+  A plug which fetches and assignes to the connection current place entity.
+  """
+
   import Plug.Conn
 
   alias MoneyTracker.{Repo, Place}
 
+  @doc """
+  Initializes plug
+  """
   def init(opts) do
     opts
   end
 
+  @doc """
+  Calls plug
+  """
+  @spec call(Plug.Conn.t, Map.t) :: Plug.Conn.t
   def call(conn, opts) do
     key = Keyword.get(opts, :key, :default)
     place_id = Map.get(conn.params, "place_id")
