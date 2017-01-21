@@ -4,6 +4,7 @@ defmodule MoneyTracker.User.BalanceForCurrencyCalculator do
   """
 
   alias MoneyTracker.{Repo, User, Place}
+  alias Place.BalanceCalculator
 
   @doc """
   Runs fetcher and returns a balance amount
@@ -14,6 +15,6 @@ defmodule MoneyTracker.User.BalanceForCurrencyCalculator do
     |> Place.for_user(user)
     |> Place.for_currency(currency)
     |> Repo.all
-    |> Place.BalanceCalculator.run
+    |> BalanceCalculator.run
   end
 end
