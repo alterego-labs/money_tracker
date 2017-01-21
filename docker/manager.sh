@@ -88,7 +88,7 @@ function run_web_container {
   echo "Running web container..."
   docker run \
     --name money_tracker_container \
-    --link money_tracker_mysql_container:mysql \
+    --link money_tracker_pg_container:db_host \
     -d -p 8888:8888 -i money_tracker_image
 }
 
