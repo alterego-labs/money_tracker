@@ -26,5 +26,9 @@ erl_crash.dump
 npm-debug.log.*
 
 /docker/mysql/mysql.env
-/docker/money_tracker.env
 /docker/mysql/data/**/*
+
+/docker/pg/vars.env
+/docker/pg/data/**/*
+
+/docker/money_tracker.env

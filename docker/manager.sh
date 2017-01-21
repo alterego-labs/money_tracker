@@ -3,6 +3,7 @@
 PWD=$(pwd)
 
 MYSQL_DATA_FOLDER="$PWD/docker/mysql/data"
+PG_LOCAL_DATA="$PWD/docker/pg/data"
 
 function stop_container_by_name {
   pid=`docker ps -a | grep "$1" | cut -d " " -f 1`;
@@ -26,6 +27,27 @@ function run_mysql_container {
 function stop_mysql_container {
   echo "Stopping mysql container..."
   stop_container_by_name "money_tracker_mysql_container";
+}
+
+function run_pg_container {
+  echo "Running PG container";
+  if [ ! -d "$PG_LOCAL_DATA" ]; then
+    mkdir -p $PG_LOCAL_DATA
+  fi
+
+  source ./docker/pg/vars.env;
+
+  docker run \
+    --name money_tracker_pg_container \
+    -e POSTGRES_USER=$PG_USER_LOGIN \
+    -e POSTGRES_PASSWORD=$PG_USER_PASSWORD \
+    -v $PG_LOCAL_DATA:/var/lib/postgresql/data \
+    -d postgres:9.6.1
+}
+
+function stop_pg_container {
+  echo "Stopping PG container...";
+  stop_container_by_name "money_tracker_pg_container";
 }
 
 function install_mix_dependencies {
@@ -55,10 +77,10 @@ function build_web_container {
   docker build \
     --build-arg MONEY_TRACKER_SECRET_KEY_BASE=$MONEY_TRACKER_SECRET_KEY_BASE \
     --build-arg MONEY_TRACKER_HOST=$MONEY_TRACKER_HOST \
-    --build-arg MONEY_TRACKER_MYSQL_USER=$MONEY_TRACKER_MYSQL_USER \
-    --build-arg MONEY_TRACKER_MYSQL_PASSWORD=$MONEY_TRACKER_MYSQL_PASSWORD \
-    --build-arg MONEY_TRACKER_MYSQL_DB=$MONEY_TRACKER_MYSQL_DB \
-    --build-arg MONEY_TRACKER_MYSQL_HOST=$MONEY_TRACKER_MYSQL_HOST \
+    --build-arg MONEY_TRACKER_DB_USER=$MONEY_TRACKER_DB_USER \
+    --build-arg MONEY_TRACKER_DB_PASSWORD=$MONEY_TRACKER_DB_PASSWORD \
+    --build-arg MONEY_TRACKER_DB_NAME=$MONEY_TRACKER_DB_NAME \
+    --build-arg MONEY_TRACKER_DB_HOST=$MONEY_TRACKER_DB_HOST \
     -t money_tracker_image .
 }
 
