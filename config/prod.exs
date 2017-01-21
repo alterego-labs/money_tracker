@@ -64,7 +64,7 @@ config :money_tracker, MoneyTracker.Endpoint,
 
 # Configure your database
 config :money_tracker, MoneyTracker.Repo,
-  adapter: Ecto.Adapters.MySQL,
+  adapter: Ecto.Adapters.Postgres,
   username: System.get_env("MONEY_TRACKER_MYSQL_USER"),
   password: System.get_env("MONEY_TRACKER_MYSQL_PASSWORD"),
   database: System.get_env("MONEY_TRACKER_MYSQL_DB"),

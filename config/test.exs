@@ -11,7 +11,7 @@ config :logger, level: :warn
 
 # Configure your database
 config :money_tracker, MoneyTracker.Repo,
-  adapter: Ecto.Adapters.MySQL,
+  adapter: Ecto.Adapters.Postgres,
   username: "root",
   password: "",
   database: "money_tracker_test",
