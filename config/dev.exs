@@ -36,8 +36,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :money_tracker, MoneyTracker.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "root",
-  password: "",
+  username: "sergio",
+  password: "sergio",
   database: "money_tracker_dev",
   hostname: "localhost",
   pool_size: 10,
