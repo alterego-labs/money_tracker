@@ -102,16 +102,11 @@ function run_mix_command {
   docker run \
     --rm \
     --env-file $PWD/docker/money_tracker.env \
-    --link money_tracker_mysql_container:mysql \
+    --link money_tracker_pg_container:db_host \
     money_tracker_image $1
 }
 
 case "$1" in
-  "setup")
-    mkdir $PWD/docker/mysql;
-    mkdir $PWD/docker/mysql/data;
-    touch $PWD/docker/money_tracker.env;
-    touch $PWD/docker/mysql/mysql.env;;
   "build")
     install_mix_dependencies;
     install_npm_dependencies;
@@ -120,12 +115,12 @@ case "$1" in
     rm -rf deps/;
     rm -rf node_modules;;
   "run")
-    run_mysql_container;
+    run_pg_container;
     run_mix_command "mix do ecto.create, ecto.migrate";
     run_web_container;;
   "stop")
     stop_web_container;
-    stop_mysql_container;;
+    stop_pg_container;;
   "run_custom_mix")
     run_mix_command "mix $2";;
 esac
