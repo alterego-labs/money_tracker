@@ -2,11 +2,17 @@
 
 PWD=$(pwd)
 
-MYSQL_DATA_FOLDER="$PWD/docker/mysql/data"
 PG_LOCAL_DATA="$PWD/docker/pg/data"
 
-function stop_container_by_name {
-  pid=`docker ps -a | grep "$1" | cut -d " " -f 1`;
+DB_CONTAINER_NAME="money_tracker_pg_container"
+APP_CONTAINER_NAME="money_tracker_container"
+
+function get_container_pid_by_name() {
+  echo `docker ps -a | grep "$1" | cut -d " " -f 1`;
+}
+
+function stop_container_by_name() {
+  local pid=`get_container_pid_by_name "$1"`
   if [ -n "$pid" ];
   then
     echo "Stopping $1 container..."
@@ -14,22 +20,17 @@ function stop_container_by_name {
   fi
 }
 
-function run_mysql_container {
-  echo "Running mysql container..."
-  docker run \
-    --name money_tracker_mysql_container \
-    --env-file ./docker/mysql/mysql.env \
-    --restart=unless-stopped \
-    -v $MYSQL_DATA_FOLDER:/var/lib/mysql \
-    -d -p 3306:3306 mysql:5.6
+function check_status() {
+  local db_container_pid=`get_container_pid_by_name $DB_CONTAINER_NAME`;
+  local app_container_pid=`get_container_pid_by_name $APP_CONTAINER_NAME`;
+  if [ -n "$db_container_pid" ] && [ -n "$app_container_pid" ]; then
+    echo "Running"
+  else
+    echo "Not running"
+  fi
 }
 
-function stop_mysql_container {
-  echo "Stopping mysql container..."
-  stop_container_by_name "money_tracker_mysql_container";
-}
-
-function run_pg_container {
+function run_pg_container() {
   echo "Running PG container";
   if [ ! -d "$PG_LOCAL_DATA" ]; then
     mkdir -p $PG_LOCAL_DATA
@@ -38,19 +39,19 @@ function run_pg_container {
   source ./docker/pg/vars.env;
 
   docker run \
-    --name money_tracker_pg_container \
+    --name $DB_CONTAINER_NAME \
     -e POSTGRES_USER=$PG_USER_LOGIN \
     -e POSTGRES_PASSWORD=$PG_USER_PASSWORD \
     -v $PG_LOCAL_DATA:/var/lib/postgresql/data \
     -d -p 5432:5432 postgres:9.6.1
 }
 
-function stop_pg_container {
+function stop_pg_container() {
   echo "Stopping PG container...";
   stop_container_by_name "money_tracker_pg_container";
 }
 
-function install_mix_dependencies {
+function install_mix_dependencies() {
   echo "Starting installing MIX dependencies..."
   docker run \
     --rm --memory="512M" \
@@ -61,7 +62,7 @@ function install_mix_dependencies {
     elixir:1.3.2
 }
 
-function install_npm_dependencies {
+function install_npm_dependencies() {
   echo "Starting installing NPM dependencies..."
   docker run \
     --rm --memory="512M" \
@@ -71,7 +72,7 @@ function install_npm_dependencies {
     node:6.9.4
 }
 
-function build_web_container {
+function build_web_container() {
   echo "Building web container..."
   source $PWD/docker/money_tracker.env
   docker build \
@@ -84,25 +85,25 @@ function build_web_container {
     -t money_tracker_image .
 }
 
-function run_web_container {
+function run_web_container() {
   echo "Running web container..."
   docker run \
-    --name money_tracker_container \
-    --link money_tracker_pg_container:db_host \
+    --name $APP_CONTAINER_NAME \
+    --link $DB_CONTAINER_NAME:db_host \
     -d -p 8888:8888 -i money_tracker_image
 }
 
-function stop_web_container {
+function stop_web_container() {
   echo "Stopping web container..."
   stop_container_by_name "money_tracker_container";
 }
 
-function run_mix_command {
+function run_mix_command() {
   echo "Running mix command '$1' on web container..."
   docker run \
     --rm \
     --env-file $PWD/docker/money_tracker.env \
-    --link money_tracker_pg_container:db_host \
+    --link $DB_CONTAINER_NAME:db_host \
     money_tracker_image $1
 }
 
@@ -121,6 +122,8 @@ case "$1" in
   "stop")
     stop_web_container;
     stop_pg_container;;
+  "status")
+    check_status;;
   "run_custom_mix")
     run_mix_command "mix $2";;
 esac
