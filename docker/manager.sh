@@ -44,6 +44,7 @@ function run_pg_container() {
     -e POSTGRES_PASSWORD=$PG_USER_PASSWORD \
     -v $PG_LOCAL_DATA:/var/lib/postgresql/data \
     -d -p 5432:5432 postgres:9.6.1
+  sleep 10
 }
 
 function stop_pg_container() {
